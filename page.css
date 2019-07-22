@@ -1,0 +1,80 @@
+body {
+  font-size: 1rem;
+}
+
+[method="dialog"] {
+  width: 50vw;
+  max-width: 768px;
+  padding: 16px;
+}
+
+[method="dialog"] input[type="url"],
+[method="dialog"] textarea {
+  display: block;
+  margin-top: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 0.875rem;
+  -webkit-appearance: textfield;
+  resize: vertical;
+  color: #333;
+}
+
+[method="dialog"] input[type="checkbox"] {
+  font-size: 1rem;
+}
+
+[method="dialog"] menu {
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#list {
+  padding-left: 0;
+  color: #333;
+  margin: 0;
+}
+
+#list li {
+  display: flex;
+  padding: 16px 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px dashed;
+}
+
+
+
+pre {
+  margin-bottom: 0;
+}
+
+main {
+  max-width: 768px;
+  margin: auto;
+}
+
+main h1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  margin-bottom: 0;
+  padding-bottom: 8px;
+}
+
+dialog {
+  padding: 0;
+}
+
+details {
+  white-space: nowrap;
+  width: 80%;
+}
+summary {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

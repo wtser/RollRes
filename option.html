@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="page.css" />
+  </head>
+  <body>
+    <dialog id="dialog">
+      <form id="dialogForm" method="dialog">
+        <p>
+          <label
+            >Response Url
+            <input name="responseUrl" type="url" required />
+          </label>
+        </p>
+        <p>
+          <label
+            >Request Url
+            <textarea name="requestUrl" rows="10" required></textarea>
+          </label>
+        </p>
+        <p>
+          <input id="enable" type="checkbox" name="enable" value="1" checked />
+          <label for="enable">Enable</label>
+        </p>
+        <menu>
+          <button type="submit" id="confirmBtn" value="yes">Submit</button>
+          <button type="button" id="deleteBtn" value="remove">Remove</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <main>
+      <h1>RollRes <button id="addBtn">Add</button></h1>
+      <ul id="list"></ul>
+    </main>
+
+    <script src="page.js"></script>
+  </body>
+</html>
