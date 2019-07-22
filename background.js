@@ -1,4 +1,7 @@
-const rollres = JSON.parse(localStorage.getItem("rollres")) || [];
+var rollres = [];
+function updateRollres() {
+  rollres = JSON.parse(localStorage.getItem("rollres")) || [];
+}
 
 var typeMap = {
   txt: "text/plain",
@@ -49,8 +52,11 @@ chrome.webRequest.onBeforeRequest.addListener(
     var url = details.url;
     for (var i = 0, len = rollres.length; i < len; i++) {
       const { requestUrl, enable, responseUrl } = rollres[i];
-      const reg = regsTest(requestUrl, url);
-      if (enable && typeof responseUrl === "string" && reg) {
+      const regTestStr = regsTest(requestUrl, url);
+
+      if (enable && typeof responseUrl === "string" && regTestStr) {
+        const reg = new RegExp(regTestStr, "gi");
+
         if (!/^file:\/\//.test(responseUrl)) {
           url = url.replace(reg, responseUrl);
         } else {
@@ -63,3 +69,7 @@ chrome.webRequest.onBeforeRequest.addListener(
   { urls: ["<all_urls>"] },
   ["blocking"]
 );
+
+updateRollres();
+
+window.addEventListener("storage", updateRollres, false);
