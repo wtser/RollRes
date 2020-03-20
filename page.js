@@ -1,5 +1,8 @@
-(function() {
-  const rollres = JSON.parse(localStorage.getItem("rollres")) || [];
+chrome.storage.sync.get("rollres", function(content) {
+  let rollres = content.rollres || [];
+  if (!rollres) {
+    chrome.storage.sync.set({ rollres: [] });
+  }
 
   var $list = document.getElementById("list");
   var $addBtn = document.getElementById("addBtn");
@@ -49,7 +52,7 @@
         } else {
           rollres[updateIndex] = obj;
         }
-        localStorage.setItem("rollres", JSON.stringify(rollres));
+        chrome.storage.sync.set({ rollres: rollres });
 
         renderList(rollres);
       }
@@ -69,7 +72,7 @@
         confirm(`Are you sure to remove ${rollres[updateIndex].responseUrl}?`)
       ) {
         rollres.splice(updateIndex, 1);
-        localStorage.setItem("rollres", JSON.stringify(rollres));
+        chrome.storage.sync.set({ rollres: rollres });
         $dialog.close();
         renderList(rollres);
       }
@@ -80,7 +83,7 @@
 
     if (e.target.type === "checkbox") {
       rollres[updateIndex].enable = e.target.checked;
-      localStorage.setItem("rollres", JSON.stringify(rollres));
+      chrome.storage.sync.set({ rollres: rollres });
     }
 
     if (e.target.type === "button") {
@@ -92,4 +95,4 @@
       $deleteBtn.removeAttribute("hidden");
     }
   });
-})();
+});

@@ -1,6 +1,18 @@
 var rollres = [];
+
+const getSyncFile = function() {
+  return new Promise(function(reslove, reject) {
+    chrome.storage.sync.get("rollres", function(content) {
+      reslove(content.rollres);
+    });
+  });
+};
+
 function updateRollres() {
   rollres = JSON.parse(localStorage.getItem("rollres")) || [];
+  getSyncFile().then(function(syncRollres) {
+    rollres = syncRollres;
+  });
 }
 
 var typeMap = {
@@ -72,4 +84,6 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 updateRollres();
 
-window.addEventListener("storage", updateRollres, false);
+chrome.storage.onChanged.addListener(function() {
+  updateRollres();
+});
