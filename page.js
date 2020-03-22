@@ -1,3 +1,8 @@
+function saveData(rollres) {
+  localStorage.setItem("rollres", JSON.stringify(rollres));
+  chrome.storage.sync.set({ rollres });
+}
+
 chrome.storage.sync.get("rollres", function(content) {
   let rollres = content.rollres || [];
   if (!rollres) {
@@ -52,7 +57,7 @@ chrome.storage.sync.get("rollres", function(content) {
         } else {
           rollres[updateIndex] = obj;
         }
-        chrome.storage.sync.set({ rollres: rollres });
+        saveData(rollres);
 
         renderList(rollres);
       }
@@ -72,7 +77,7 @@ chrome.storage.sync.get("rollres", function(content) {
         confirm(`Are you sure to remove ${rollres[updateIndex].responseUrl}?`)
       ) {
         rollres.splice(updateIndex, 1);
-        chrome.storage.sync.set({ rollres: rollres });
+        saveData(rollres);
         $dialog.close();
         renderList(rollres);
       }
@@ -83,7 +88,7 @@ chrome.storage.sync.get("rollres", function(content) {
 
     if (e.target.type === "checkbox") {
       rollres[updateIndex].enable = e.target.checked;
-      chrome.storage.sync.set({ rollres: rollres });
+      saveData(rollres);
     }
 
     if (e.target.type === "button") {
